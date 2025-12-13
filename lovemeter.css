@@ -1,0 +1,241 @@
+/* Love Meter Specific Styles */
+
+.indent {
+    padding-left: 24px;
+}
+
+.function {
+    color: #6f42c1;
+    font-weight: 500;
+}
+
+.measure-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #d73a49 0%, #e85d6b 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(215, 58, 73, 0.3);
+}
+
+.measure-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(215, 58, 73, 0.4);
+    background: linear-gradient(135deg, #e85d6b 0%, #d73a49 100%);
+}
+
+.measure-btn:active {
+    transform: translateY(0);
+}
+
+.measure-btn.measuring {
+    animation: pulse 1.5s ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(0.98);
+    }
+    75% {
+        transform: scale(1.02);
+    }
+}
+
+.btn-icon {
+    display: inline-block;
+    font-size: 16px;
+    animation: heartPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(1.2);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+.measure-btn.measuring .btn-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.output-result {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #6a737d;
+    min-height: 24px;
+}
+
+.hearts {
+    display: inline-flex;
+    gap: 4px;
+    font-size: 20px;
+}
+
+.hearts .heart {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(0);
+    animation: heartPop 0.4s ease-out forwards;
+}
+
+.hearts .heart:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.hearts .heart:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.hearts .heart:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.hearts .heart:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.hearts .heart:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+@keyframes heartPop {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-30deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.result-text {
+    color: #d73a49;
+    font-weight: 600;
+    font-size: 16px;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.result-text.show {
+    animation: slideIn 0.5s ease-out 0.5s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.measuring-text {
+    color: #6a737d;
+    font-style: italic;
+    animation: blink 1.5s ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.back-link {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.back-link a {
+    color: #6a737d;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.back-link a:hover {
+    color: #d73a49;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .measure-btn {
+        font-size: 13px;
+        padding: 7px 16px;
+    }
+    
+    .btn-icon {
+        font-size: 14px;
+    }
+    
+    .hearts {
+        font-size: 18px;
+    }
+    
+    .result-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .measure-btn {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+    
+    .btn-icon {
+        font-size: 13px;
+    }
+    
+    .hearts {
+        font-size: 16px;
+        gap: 2px;
+    }
+    
+    .result-text {
+        font-size: 13px;
+    }
+    
+    .indent {
+        padding-left: 12px;
+    }
+}
+
