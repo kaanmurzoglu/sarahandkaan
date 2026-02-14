@@ -284,6 +284,10 @@ body {
 .nav-links {
     margin-top: 24px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .lovemeter-link {

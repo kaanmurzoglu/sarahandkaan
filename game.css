@@ -1,0 +1,607 @@
+/* Valentine's Day Memory Game Styles */
+
+.game-container {
+    flex-direction: column;
+    max-width: 560px;
+}
+
+.game-code-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px 24px;
+    background: #ffffff;
+    gap: 16px;
+}
+
+.game-header-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.game-header-section .code-line {
+    font-size: 13px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 28px;
+}
+
+.spacer {
+    display: inline-block;
+    width: 16px;
+}
+
+.hint-line {
+    font-size: 12px !important;
+    opacity: 0.85;
+}
+
+/* Game Board Wrapper - holds the hidden photo + card grid */
+.game-board-wrapper {
+    position: relative;
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Hidden Photo Behind Cards */
+.hidden-photo {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    z-index: 0;
+    filter: blur(0px);
+    transition: filter 0.5s ease;
+}
+
+/* Game Board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 6px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Card Styles */
+.card {
+    aspect-ratio: 1;
+    perspective: 600px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 8px;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-front {
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+    border: 2px solid #f48fb1;
+    box-shadow: 0 2px 8px rgba(244, 143, 177, 0.3);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.card-front::after {
+    content: "?";
+    font-size: 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: rgba(215, 58, 73, 0.5);
+}
+
+.card:hover .card-front {
+    box-shadow: 0 4px 16px rgba(215, 58, 73, 0.35);
+    transform: scale(1.03);
+}
+
+.card.flipped:hover .card-front {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(244, 143, 177, 0.3);
+}
+
+.card-back {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    transform: rotateY(180deg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 4px;
+}
+
+/* Card content types */
+.card-emoji {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.card-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: #d73a49;
+    text-align: center;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+/* Matched & Revealed cards - fade away to show photo */
+.card.matched .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card.matched .card-back {
+    border-color: #27c93f;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+    box-shadow: 0 2px 12px rgba(39, 201, 63, 0.2);
+    animation: matchPop 0.5s ease-out;
+}
+
+.card.matched {
+    cursor: default;
+}
+
+.card.revealed .card-inner {
+    animation: revealFade 1s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes revealFade {
+    0% {
+        opacity: 1;
+        transform: rotateY(180deg) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: rotateY(180deg) scale(0.95);
+    }
+    100% {
+        opacity: 0;
+        transform: rotateY(180deg) scale(0.9);
+        visibility: hidden;
+    }
+}
+
+/* When all cards are revealed */
+.game-board.all-revealed {
+    animation: boardGlow 1s ease-out;
+}
+
+@keyframes boardGlow {
+    0% {
+        box-shadow: 0 0 0 rgba(215, 58, 73, 0);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(215, 58, 73, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 0 rgba(215, 58, 73, 0);
+    }
+}
+
+@keyframes matchPop {
+    0% {
+        transform: rotateY(180deg) scale(1);
+    }
+    30% {
+        transform: rotateY(180deg) scale(1.12);
+    }
+    60% {
+        transform: rotateY(180deg) scale(0.95);
+    }
+    100% {
+        transform: rotateY(180deg) scale(1);
+    }
+}
+
+/* Wrong match */
+.card.wrong .card-back {
+    animation: shake 0.4s ease-out;
+    border-color: #ff5f56;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotateY(180deg) translateX(0); }
+    20% { transform: rotateY(180deg) translateX(-6px); }
+    40% { transform: rotateY(180deg) translateX(6px); }
+    60% { transform: rotateY(180deg) translateX(-4px); }
+    80% { transform: rotateY(180deg) translateX(4px); }
+}
+
+/* Match label animation */
+.match-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: rgba(215, 58, 73, 0.95);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+    animation: labelFloat 1.2s ease-out forwards;
+    box-shadow: 0 4px 12px rgba(215, 58, 73, 0.4);
+}
+
+@keyframes labelFloat {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    40% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -70%) scale(0.9);
+    }
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.game-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #d73a49 0%, #e85d6b 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(215, 58, 73, 0.3);
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(215, 58, 73, 0.4);
+    background: linear-gradient(135deg, #e85d6b 0%, #d73a49 100%);
+}
+
+.game-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon-game {
+    font-size: 16px;
+    display: inline-block;
+}
+
+/* Victory Modal */
+.victory-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.victory-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.victory-modal {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px 36px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    transform: scale(0.8) translateY(20px);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-width: 420px;
+    width: 90%;
+}
+
+.victory-overlay.show .victory-modal {
+    transform: scale(1) translateY(0);
+}
+
+.victory-hearts {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.v-heart {
+    display: inline-block;
+    animation: victoryBounce 1.5s ease-in-out infinite;
+}
+
+.v-heart:nth-child(1) { animation-delay: 0s; }
+.v-heart:nth-child(2) { animation-delay: 0.2s; }
+.v-heart:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes victoryBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.1); }
+}
+
+.victory-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    font-weight: 600;
+    color: #d73a49;
+    margin-bottom: 8px;
+}
+
+.victory-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #6a737d;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+/* Slideshow */
+.slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    aspect-ratio: 3/4;
+    background: #f7fafc;
+}
+
+.slideshow-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.slideshow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    color: #d73a49;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+}
+
+.slideshow-btn:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slideshow-btn.prev { left: 8px; }
+.slideshow-btn.next { right: 8px; }
+
+.victory-message {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.victory-stats {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.victory-btn {
+    font-size: 14px;
+    padding: 10px 24px;
+}
+
+/* Floating Hearts Background */
+.floating-hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -40px;
+    opacity: 0;
+    animation: floatUp linear forwards;
+    font-size: 20px;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.5);
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(360deg) scale(1);
+    }
+}
+
+/* Back link */
+.game-container .back-link {
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-container {
+        max-width: 480px;
+    }
+
+    .game-board {
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .card-front::after {
+        font-size: 18px;
+    }
+
+    .card-emoji {
+        font-size: 24px;
+    }
+
+    .card-text {
+        font-size: 11px;
+    }
+
+    .game-code-content {
+        padding: 16px 16px 20px;
+    }
+
+    .game-header-section .code-line {
+        font-size: 12px;
+        flex-wrap: wrap;
+    }
+
+    .victory-modal {
+        padding: 28px 20px;
+    }
+
+    .victory-title {
+        font-size: 22px;
+    }
+
+    .match-label {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+
+    .slideshow {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        max-width: 360px;
+    }
+
+    .game-board {
+        gap: 4px;
+        padding: 4px;
+    }
+
+    .card-front::after {
+        font-size: 15px;
+    }
+
+    .card-emoji {
+        font-size: 20px;
+    }
+
+    .card-text {
+        font-size: 9px;
+    }
+
+    .game-header-section .code-line {
+        font-size: 11px;
+        line-height: 24px;
+    }
+
+    .hint-line {
+        font-size: 10px !important;
+    }
+
+    .game-code-content {
+        padding: 12px 12px 16px;
+        gap: 12px;
+    }
+
+    .game-btn {
+        font-size: 12px;
+        padding: 7px 16px;
+    }
+
+    .match-label {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    .slideshow {
+        max-width: 200px;
+    }
+
+    .slideshow-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .victory-subtitle {
+        font-size: 11px;
+    }
+}
