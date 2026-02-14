@@ -293,11 +293,17 @@ function spawnFloatingHeart() {
 }
 
 function startAmbientHearts() {
+    // Başlangıçta birkaç tane hemen çıksın
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => spawnFloatingHeart(), i * 300);
+    }
+    // Sürekli üretim - daha sık ve daha fazla
     setInterval(() => {
-        if (Math.random() > 0.5) {
-            spawnFloatingHeart();
+        const count = 1 + Math.floor(Math.random() * 2); // 1-2 tane birden
+        for (let i = 0; i < count; i++) {
+            setTimeout(() => spawnFloatingHeart(), i * 200);
         }
-    }, 2500);
+    }, 800);
 }
 
 // Auto-advance slideshow
