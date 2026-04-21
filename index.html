@@ -1,101 +1,69 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sarah && kaan</title>
+    <title>closed</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffeef5 0%, #fff5f7 60%, #fef1f4 100%);
+            font-family: 'Caveat', cursive;
+            color: #8b5a6b;
+            padding: 2rem;
+            text-align: center;
+        }
+        .closed {
+            max-width: 520px;
+            animation: fadeIn 1.2s ease;
+        }
+        .title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+        }
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 400;
+            opacity: 0.78;
+            line-height: 1.4;
+        }
+        .heart {
+            font-size: 1.6rem;
+            margin-top: 1.2rem;
+            opacity: 0.55;
+            display: inline-block;
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1);   opacity: 0.55; }
+            50%      { transform: scale(1.1); opacity: 0.85; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="code-editor">
-            <div class="editor-header">
-                <div class="dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                </div>
-                <div class="filename">love.js</div>
-                <div></div>
-            </div>
-            
-            <div class="code-content">
-                <div class="line-numbers">
-                    <span>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
-                    <span>5</span>
-                    <span>6</span>
-                    <span>7</span>
-                </div>
-                
-                <div class="code">
-                    <div class="code-line">
-                        <span class="keyword">const</span> 
-                        <span class="variable">sarah</span> 
-                        <span class="operator">=</span> 
-                        <label class="checkbox-wrapper">
-                            <input type="checkbox" id="sarah-toggle">
-                            <span class="checkmark"></span>
-                            <span class="boolean" data-checked="false">false</span>
-                        </label>
-                        <span class="punctuation">;</span>
-                    </div>
-                    
-                    <div class="code-line">
-                        <span class="keyword">const</span> 
-                        <span class="variable">kaan</span> 
-                        <span class="operator">=</span> 
-                        <label class="checkbox-wrapper">
-                            <input type="checkbox" id="kaan-toggle">
-                            <span class="checkmark"></span>
-                            <span class="boolean" data-checked="false">false</span>
-                        </label>
-                        <span class="punctuation">;</span>
-                    </div>
-                    
-                    <div class="code-line empty"></div>
-                    
-                    <div class="code-line">
-                        <span class="comment">// the story begins here...</span>
-                    </div>
-                    
-                    <div class="code-line empty"></div>
-                    
-                    <div class="code-line">
-                        <span class="keyword">const</span> 
-                        <span class="variable">result</span> 
-                        <span class="operator">=</span> 
-                        <span class="variable-use">sarah</span> 
-                        <span class="operator">&&</span> 
-                        <span class="variable-use">kaan</span> 
-                        <span class="operator">||</span> 
-                        <span class="string">"nothing"</span>
-                        <span class="punctuation">;</span>
-                    </div>
-                    
-                    <div class="code-line">
-                        <span class="comment">// </span>
-                        <span class="output" id="output">→ "nothing"</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="closed">
+        <p class="title">site is closed :(</p>
+        <p class="subtitle">if you are a turkish guy named kaan, you can buy this domain :d</p>
+        <div class="heart"></div>
     </div>
-    
-    <div class="nav-links">
-        <a href="lovemeter.html" class="lovemeter-link">
-            <span>💕</span> Love Meter
-        </a>
-        <a href="game.html" class="lovemeter-link">
-            <span>🎮</span> Valentine's Game
-        </a>
-    </div>
-    
-    <script src="script.js"></script>
 </body>
 </html>

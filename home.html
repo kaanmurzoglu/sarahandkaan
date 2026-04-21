@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sarah && kaan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="code-editor">
+            <div class="editor-header">
+                <div class="dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="filename">love.js</div>
+                <div></div>
+            </div>
+            
+            <div class="code-content">
+                <div class="line-numbers">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                </div>
+                
+                <div class="code">
+                    <div class="code-line">
+                        <span class="keyword">const</span> 
+                        <span class="variable">sarah</span> 
+                        <span class="operator">=</span> 
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="sarah-toggle">
+                            <span class="checkmark"></span>
+                            <span class="boolean" data-checked="false">false</span>
+                        </label>
+                        <span class="punctuation">;</span>
+                    </div>
+                    
+                    <div class="code-line">
+                        <span class="keyword">const</span> 
+                        <span class="variable">kaan</span> 
+                        <span class="operator">=</span> 
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="kaan-toggle">
+                            <span class="checkmark"></span>
+                            <span class="boolean" data-checked="false">false</span>
+                        </label>
+                        <span class="punctuation">;</span>
+                    </div>
+                    
+                    <div class="code-line empty"></div>
+                    
+                    <div class="code-line">
+                        <span class="comment">// the story begins here...</span>
+                    </div>
+                    
+                    <div class="code-line empty"></div>
+                    
+                    <div class="code-line">
+                        <span class="keyword">const</span> 
+                        <span class="variable">result</span> 
+                        <span class="operator">=</span> 
+                        <span class="variable-use">sarah</span> 
+                        <span class="operator">&&</span> 
+                        <span class="variable-use">kaan</span> 
+                        <span class="operator">||</span> 
+                        <span class="string">"nothing"</span>
+                        <span class="punctuation">;</span>
+                    </div>
+                    
+                    <div class="code-line">
+                        <span class="comment">// </span>
+                        <span class="output" id="output">→ "nothing"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-links">
+        <a href="lovemeter.html" class="lovemeter-link">
+            <span>💕</span> Love Meter
+        </a>
+        <a href="game.html" class="lovemeter-link">
+            <span>🎮</span> Valentine's Game
+        </a>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
